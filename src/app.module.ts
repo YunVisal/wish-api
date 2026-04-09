@@ -5,6 +5,7 @@ import { WishModule } from './wish/wish.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppDataSourceOption } from './database/database.config';
 import { ConfigModule } from '@nestjs/config';
+import { ResultModule } from './result/result.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { ConfigModule } from '@nestjs/config';
     }),
     TypeOrmModule.forRoot(AppDataSourceOption),
     WishModule,
+    ResultModule,
   ],
   controllers: [AppController],
   providers: [AppService],
