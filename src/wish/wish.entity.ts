@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Result } from '../result/result.entity';
+import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Wish {
@@ -7,4 +8,7 @@ export class Wish {
 
   @Column()
   content: string;
+
+  @OneToOne(() => Result)
+  result: Result;
 }

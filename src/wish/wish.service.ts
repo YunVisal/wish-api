@@ -16,4 +16,8 @@ export class WishService {
   async findAll() {
     return this.repo.find();
   }
+
+  async findById(id: number) {
+    return this.repo.findOneBy({ id });
+  }
 }
