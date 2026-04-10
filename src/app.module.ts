@@ -6,6 +6,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppDataSourceOption } from './database/database.config';
 import { ConfigModule } from '@nestjs/config';
 import { ResultModule } from './result/result.module';
+import { HealthCheckModule } from './health_check/health_check.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { ResultModule } from './result/result.module';
     TypeOrmModule.forRoot(AppDataSourceOption),
     WishModule,
     ResultModule,
+    HealthCheckModule,
   ],
   controllers: [AppController],
   providers: [AppService],
