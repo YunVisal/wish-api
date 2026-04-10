@@ -1,0 +1,15 @@
+name: Render Health Check
+
+on:
+  schedule:
+    # Runs every 10th minute (e.g., 10:00, 10:10, 10:20...)
+    - cron: '*/10 * * * *'
+  workflow_dispatch: # Still kept so you can test it manually
+
+jobs:
+  ping-api:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping API Endpoint
+        run: |
+          curl -I -s -f https://wish-api-qmgn.onrender.com/health-check || exit 1
