@@ -1,5 +1,8 @@
 import { GoogleGenAI } from '@google/genai';
+import { Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 
+@Injectable()
 export class ConsequenceTextGenerationService {
   private readonly ai: GoogleGenAI;
   private readonly SYSTEM_PROMPT = `
@@ -11,14 +14,16 @@ export class ConsequenceTextGenerationService {
     3. Format: Output ONLY the text of the consequence. Do not say "Granted" or "Here is your result."
   `;
 
-  constructor() {
+  constructor(private configService: ConfigService) {
     this.ai = new GoogleGenAI({});
   }
 
   async generate(wish: string) {
+    const model = this.configService.getOrThrow<string>('GEMINI_MODEL');
+    console.log(model);
     const fullPrompt = `${this.SYSTEM_PROMPT}\n\nWish: "${wish}"\nResult:`;
     const response = await this.ai.models.generateContent({
-      model: 'gemini-3-flash-preview',
+      model,
       contents: fullPrompt,
     });
     return response.text;
